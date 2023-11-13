@@ -24,7 +24,12 @@
             <router-link to="/blog" class="nav-link">Blog</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/mail/:from/:content" class="nav-link">Mail</router-link>
+            <!-- <router-link to="/mail/:from/:content" class="nav-link">Mail</router-link> -->
+            <router-link
+              :to="{ name: 'Mail', params: { from: '홍길동', content: 'go' } }"
+              class="nav-link"
+              >Mail</router-link
+            >
           </li>
           <li class="nav-item">
             <router-link to="/tellme" class="nav-link">TellMe</router-link>
@@ -55,7 +60,8 @@
             <a class="nav-link" href="#"> {{ userData.userName }} Logout</a>
           </li>
           <li class="nav-item" v-show="!isLogin">
-            <a class="nav-link" href="#">Login</a>
+            <!-- <a class="nav-link" href="#">Login</a> -->
+            <router-link to="/login" class="nav-link">Login</router-link>
           </li>
         </ul>
       </div>
@@ -65,6 +71,8 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+//vite이 static  content에 대해 대신 하드코딩 방식으로 처리해준다.
+import notLoginUserProfileImageUrl from '/src/assets/noProfile.png'
 const searchWord = ref('')
 const search = (e) => {
   // 이벤트 객체 받아와서 default action 방지
@@ -77,6 +85,6 @@ const search = (e) => {
 const isLogin = ref(false)
 const userData = reactive({
   userName: '',
-  userProfileImageUrl: '/src/assets/noProfile.png'
+  userProfileImageUrl: notLoginUserProfileImageUrl
 })
 </script>
